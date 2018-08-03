@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue-practice</title>
+</head>
+
+<body>
+  <h1>Hello, world!</h1>
+  <hr />
+  <div id="app">
+    {{ message }}
+    <ol>
+      <li v-for="item in contents">
+        {{ item.content }}
+      </li>
+  
+    </ol>
+  
+  </div>
+</body>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      contents : []
+    },
+    mounted(){
+      axios.get('http://localhost:7788/api/v2/contents').then((res)=>{
+        //console.log(res.data)
+        this.contents = res.data;
+       console.log(this.contents)
+      })
+    }
+  })
+</script>
+
+</html>

@@ -2,11 +2,12 @@
   "contents": [
     {
       "id": 1,
-      "contents": "demo"
+      "content": "demo"
     },
     {
-      "contents": "Sam",
-      "id": 2
+      "id": 2,
+      "content": "Sam"
+
     }
   ],
   "users": [
