@@ -9,15 +9,23 @@
 <body>
   <h1>Hello, world!</h1>
   <hr />
+  <h2>ParentComponent send data to ChildComponent</h2>
   <div id="app">
-    {{ message }}
-    <ol>
+    <!-- {{ content }} -->
+    <!-- <ol>
       <li v-for="item in contents">
         {{ item.content }}
       </li>
   
-    </ol>
-  
+    </ol> -->
+    <div>
+        <label>parentComponent's parameter :</label>
+        <input type="text" v-model.trim="parameter">
+        <button v-on:click="sendHandler">更新</button>
+    </div>
+    <p>========================</p>
+    <childcomponent childparameter="${this.childparameter}"></childcomponent>
+
   </div>
 </body>
 
@@ -26,19 +34,48 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
 <script>
-  var app = new Vue({
+  
+  let ChildComponent = {
+    template:
+      `
+      <div>
+        <label>{{ childparameter }}</label>
+        <button v-on:click="search">search</button>
+      </div>
+    `,
+    //delimiters: ['${', '}'],
+    props: ['childparameter'], //使用`props`聲明它所獲得的資料
+    methods: {
+      search() {
+        alert(`search parameter:${this.childparameter}`);
+      }
+    }
+  }
+
+  let app = new Vue({
     el: '#app',
     data: {
-      contents : []
+      parameter: "init"
     },
-    mounted(){
-      axios.get('http://localhost:7788/api/v2/contents').then((res)=>{
-        //console.log(res.data)
-        this.contents = res.data;
-       console.log(this.contents)
-      })
+    components: {
+      'childcomponent': ChildComponent
+    },
+    methods: {
+      sendHandler() {
+        console.log(`trigger sendHandler(${this.parameter})`)
+
+      }
+    },
+    mounted() {
+      // axios.get('http://localhost:7788/api/v2/contents').then((res)=>{
+      //   //console.log(res.data)
+      //   this.contents = res.data;
+      //  console.log(this.contents)
+      // })
+      this.parameter = "db-parameter"
     }
   })
+
 </script>
 
 </html>
