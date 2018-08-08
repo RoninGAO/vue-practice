@@ -19,12 +19,12 @@
   
     </ol> -->
     <div>
-        <label>parentComponent's parameter :</label>
-        <input type="text" v-model.trim="parameter">
-        <button v-on:click="sendHandler">更新</button>
+      <label>parentComponent's parameter :</label>
+      <input type="text" v-model.trim="parameter">
+      <button v-on:click="sendHandler">更新</button>
     </div>
     <p>========================</p>
-    <childcomponent childparameter="${this.childparameter}"></childcomponent>
+    <childcomponent></childcomponent>
 
   </div>
 </body>
@@ -34,7 +34,7 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/vuex/3.0.1/vuex.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.js'></script>
 <script>
-  
+
   let ChildComponent = {
     template:
       `
@@ -44,11 +44,22 @@
       </div>
     `,
     //delimiters: ['${', '}'],
-    props: ['childparameter'], //使用`props`聲明它所獲得的資料
+    data: function () {
+      return {
+        childparameter: "child init"
+      };
+    },
     methods: {
+      setParam(param) {
+        console.log(`EVENT setParam : ${param}`)
+        this.childparameter = param
+      },
       search() {
         alert(`search parameter:${this.childparameter}`);
       }
+    },
+    created: function () {
+      this.$parent.$on('update', this.setParam);
     }
   }
 
@@ -63,6 +74,8 @@
     methods: {
       sendHandler() {
         console.log(`trigger sendHandler(${this.parameter})`)
+        console.log(this.parameter)
+        this.$emit('update', this.parameter);
 
       }
     },
