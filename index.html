@@ -51,14 +51,16 @@
     },
     methods: {
       setParam(param) {
-        console.log(`EVENT setParam : ${param}`)
+        console.log(`EVENT setParam : ${param} to childparameter`)
         this.childparameter = param
       },
       search() {
+        console.log(`childparameter value:${this.childparameter}`)
         alert(`search parameter:${this.childparameter}`);
       }
     },
     created: function () {
+      console.log(`bind $parent update eventhandler & child setParam method`)
       this.$parent.$on('update', this.setParam);
     }
   }
@@ -73,8 +75,9 @@
     },
     methods: {
       sendHandler() {
-        console.log(`trigger sendHandler(${this.parameter})`)
-        console.log(this.parameter)
+        console.log(`paramater value : ${this.parameter}`)
+        console.log(`trigger sendHandler()`)
+        console.log(`trigger $emit('update', this.parameter)`)
         this.$emit('update', this.parameter);
 
       }
