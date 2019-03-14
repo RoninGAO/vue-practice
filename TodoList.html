@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Todo List - practice</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.8/vue.min.js'></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <input type="text" id="tb_task" v-model="input_task" v-on:keyup="valid_status">
+      <button v-on:click="add">送出</button>&nbsp;&nbsp;
+      <span v-if="valid_input">
+        <label v-if="add_success">add success</label>
+        <label v-else="add_success">nothing to add</label>
+      </span>
+    </div>
+    <div>
+      <h1>Todo List:</h1>
+      <ul>
+        <li v-for="(task,index) in tasks" :key="task.tid">
+          <span>
+            <button v-on:click="finish(index)">完成</button>
+            <button v-on:click="remove(index)">刪除</button>
+          </span>
+          <span>{{task.tid}} - {{task.name}}</span>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <h1>Finish list:</h1>
+      <ul>
+        <li v-for="(task,index) in finish_tasks" :key="task.tid">
+          <span>{{task.tid}} - {{task.name}}</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        input_task: "",
+        valid_input: false,
+        add_success: false,
+        tid_seq : 3,
+        tasks: [
+          { tid: 1, name: "C#" },
+          { tid: 2, name: "Javascript" },
+          { tid: 3, name: "python" }
+        ],
+        finish_tasks: []
+      },
+      methods: {
+        add() {
+          if (this.input_task.trim().length > 0) {
+            this.valid_input = true
+            this.add_success = true
+            this.tasks.push({ tid: this.tid_seq +=1 , name: this.input_task })
+          } else {
+            this.valid_input = true
+            this.add_success = false
+          }
+        },
+        remove(delete_index) {
+          this.tasks.splice(delete_index, 1)
+        },
+        finish(finish_index) {
+          this.finish_tasks.push(this.tasks[finish_index])
+          this.tasks.splice(finish_index, 1)
+        },
+        valid_status() {
+          this.valid_input = false
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>
