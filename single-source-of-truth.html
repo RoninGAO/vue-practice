@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>SingleSourceOfTruth - practice</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js'></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="checkbox" name="ck" id="ck_a" v-model="a"><label for="ck_a">a</label>
+    <input type="checkbox" name="ck" id="ck_b" v-model="b"><label for="ck_b">b</label>
+    <input type="checkbox" name="ck" id="ck_c" v-model="c"><label for="ck_c">c</label>
+    <br />
+    <h1>{{selected}}</h1>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        a: false,
+        b: false,
+        c: false
+      },
+      methods: {
+      },
+      computed: {
+        selected(item){
+          return ['a','b','c'].filter(item => this[item] )
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>
