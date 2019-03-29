@@ -47,7 +47,7 @@
         input_task: "",
         valid_input: false,
         add_success: false,
-        tid_seq : 3,
+        tid_seq: 3,
         tasks: [
           { tid: 1, name: "C#" },
           { tid: 2, name: "Javascript" },
@@ -60,7 +60,8 @@
           if (this.input_task.trim().length > 0) {
             this.valid_input = true
             this.add_success = true
-            this.tasks.push({ tid: this.tid_seq +=1 , name: this.input_task })
+            this.tasks.push({ tid: this.tid_seq += 1, name: this.input_task })
+            this.input_task = ''
           } else {
             this.valid_input = true
             this.add_success = false

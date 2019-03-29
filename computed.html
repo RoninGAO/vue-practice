@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Computed & Watch - practice</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.8/vue.min.js'></script>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <input type="number" name="" id="" v-model="a" />&nbsp;+&nbsp;
+      <input type="number" name="" id="" v-model="b" />&nbsp;=&nbsp;
+      <input type="number" name="" id="" v-model="c" />
+
+    </div>
+    {{a}} + {{b}} = {{c}}
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        a: 1,
+        b: 2,
+      },
+      methods: {
+      },
+      computed: {
+        // c(){
+        //   return parseInt(this.a) +parseInt(this.b)
+        // }
+        c: {
+          get() {
+            return parseInt(this.a, 10) + parseInt(this.b, 10)
+          },
+          set(val) {
+            this.b = parseInt(val, 10) - parseInt(this.a, 10)
+          }
+        }
+      },
+      watch: {
+        a(val, oldVal) {
+          console.log(`a's oldVal => ${oldVal}, a's val => ${val}`)
+        },
+        b(val, oldVal) {
+          console.log(`b's oldVal => ${oldVal}, b's val => ${val}`)
+        },
+        c(val, oldVal) {
+          console.log(`c's oldVal => ${oldVal}, c's val => ${val}`)
+
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.11/vue.min.js'></script>
+</head>
+
+<body>
+  <div id="counter">
+    <h1>{{count}}</h1>
+    <button v-on:click="add">+1</button>&nbsp;&nbsp;
+    <button v-on:click="remove">-1</button>
+    <br /><br />
+    <span v-if='see'>you can see me</span>
+    <span v-else>you can't see me</span>
+    <br /><br />
+    <ul>
+      <li v-for="book in list">{{book.id}}-{{book.book_name}}</li>
+    </ul>
+    <br /><br />
+    <ul>
+      <li v-for="item in items">{{item}}</li>
+    </ul>
+    <button v-on:click="item_push">+1</button>&nbsp;&nbsp;
+    <button v-on:click="item_pop">-1</button>
+    <br /><br />
+    <input type="text" name="" id="" v-model="tbtxt"><br/>
+    <div>{{tbtxt}}</div>
+  </div>
+  <script>
+    new Vue({
+      el: '#counter',
+      data: {
+        count: 0,
+        see: false,
+        list: [
+          { id: 1, book_name: 'C#' },
+          { id: 2, book_name: 'Javascript' },
+          { id: 3, book_name: 'python' },
+          { id: 4, book_name: 'java' },
+        ],
+        items: [1, 2, 3, 4, 5, 6],
+        tbtxt: 'TEST'
+      },
+      methods: {
+        add() { this.count += 1; },
+        remove() { this.count -= 1; },
+        item_push() { this.items.push(this.items.length + 1) },
+        item_pop() { this.items.pop() }
+      },
+    });
+  </script>
+</body>
+
+</html>
