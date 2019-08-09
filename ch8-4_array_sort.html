@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DigiRonin - Vue Practice - ch8-4 array sort </title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.8/vue.min.js'></script>
+  <style>
+    #app {
+      text-align: left;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1> array sort</h1> 
+    <div>
+      <ul>
+        <li v-for="num in nums">{{num}}</li>
+      </ul>
+      <br />
+      <button v-on:click="array_original">Original</button>
+      <button v-on:click="array_sort">Sort</button>
+
+      <button v-on:click="array_reverse">reverse</button>
+    </div>
+  </div>
+  <script>
+    const orgNums = [1,2,3,4,5,6,7,8,9];
+    new Vue({
+      el: '#app',
+      name : 'array_sort',
+      data: {
+        nums: orgNums
+      },
+      beforeCreate() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => beforeCreate()`)
+      },
+      created() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => created()`)
+      },
+      beforeMount() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => beforeMount()`)
+      },
+      mounted() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => mounted()`)
+      },
+      beforeUpdate() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => beforeUpdate()`)
+      },
+      updated() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => updated()`)
+      },
+      beforeDestroy() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => beforeDestroy()`)
+      },
+      destroyed() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => destroyed()`)
+      },
+      methods: {
+        array_original(){
+          this.nums = orgNums
+        },
+        array_sort(){
+          // this.nums.sort()  will change orgNums 
+          this.nums = this.nums.slice().sort(); // slice() will clone new array to sort(), 
+        },
+        array_reverse(){
+          // this.nums.reverse() will change orgNums
+          this.nums = this.nums.slice().reverse();  // slice() will clone new array to reverse(), 
+        }
+      },
+      computed: {
+      },
+      watch: {
+      },
+    })
+  </script>
+</body>
+
+</html>
