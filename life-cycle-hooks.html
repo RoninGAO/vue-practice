@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DigiRonin - Vue Practice - Life Cycle Hooks </title>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.8/vue.min.js'></script>
+  <style>
+    #app {
+      text-align: left;
+    }
+
+    .submit {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 4px 8px;
+      margin: 4px;
+    }
+
+    .disabled {
+      background-color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Instance Life Cycle Hooks</h1> 
+    <div>
+      <input type="text" name="" id="" v-model="text" />
+      <br />
+      <button v-bind:class="btnClass">Submit</button>
+    </div>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      name : 'hooks',
+      data: {
+        text: ""
+      },
+      beforeCreate() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => beforeCreate()`)
+      },
+      created() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => created()`)
+      },
+      beforeMount() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => beforeMount()`)
+      },
+      mounted() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => mounted()`)
+      },
+      beforeUpdate() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => beforeUpdate()`)
+      },
+      updated() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => updated()`)
+      },
+      beforeDestroy() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => beforeDestroy()`)
+      },
+      destroyed() {
+        console.log(this.$options.name, `Vue Life Cycle Hooks => destroyed()`)
+      },
+      methods: {
+      },
+      computed: {
+        btnClass() {
+          return {
+            submit: true,
+            disabled : this.text.length === 0
+          }
+        }
+      },
+      watch: {
+      },
+    })
+  </script>
+</body>
+
+</html>
